@@ -16,11 +16,13 @@
 				<p>&nbsp;</p>
 				<p>To get in touch regarding my services please fill out the form below. &nbsp;You can also contact me directly at <a href="mailto:david@dkjensen.com">david@dkjensen.com</a>.</p>
 
+				<div id="form-status"></div>
+
 				<form id="my-form" action="https://formspree.io/xdowooed" method="POST" class="contact-form">
 					<p><input type="text" name="name" placeholder="Contact name" /></p>
 					<p><input type="email" name="email" placeholder="Email" /></p>
 					<p><textarea name="message" placeholder="Inquiry"></textarea></p>
-					<p style="text-align: right;"><input type="submit" value="Send Message" /></p>
+					<p style="text-align: right;"><input type="submit" id="submit" value="Send Message" /></p>
 				</form>
 
                 <p style="text-align: center; opacity: .5; font-family: Arial, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;"><a href="https://seattlewebco.com" title="Seattle website design and development" style="text-decoration: none;">Seattle Web Design & Development</a></p>
@@ -32,8 +34,8 @@
 			// get the form elements defined in your form HTML above
 
 			var form = document.getElementById("my-form");
-			var button = document.getElementById("my-form-button");
-			var status = document.getElementById("my-form-status");
+			var button = document.getElementById("submit");
+			var status = document.getElementById("form-status");
 
 			// Success and Error functions for after the form is submitted
 

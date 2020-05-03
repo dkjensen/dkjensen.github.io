@@ -16,17 +16,63 @@
 				<p>&nbsp;</p>
 				<p>To get in touch regarding my services please fill out the form below. &nbsp;You can also contact me directly at <a href="mailto:david@dkjensen.com">david@dkjensen.com</a>.</p>
 
-				<form method="post" class="contact-form">
-					<p><input type="text" name="_contact_name" placeholder="Contact name" value="<?php print $name; ?>" /></p>
-					<p><input type="email" name="_contact_method" placeholder="Email" value="<?php print $method; ?>" /></p>
-					<p><textarea name="_contact_inquiry" placeholder="Inquiry"><?php print $inquiry; ?></textarea></p>
-					<p style="display: none;"><input type="text" name="_contact_phone" value="" /></p>
+				<form id="my-form" action="https://formspree.io/xdowooed" method="POST" class="contact-form">
+					<p><input type="text" name="name" placeholder="Contact name" /></p>
+					<p><input type="email" name="email" placeholder="Email" /></p>
+					<p><textarea name="message" placeholder="Inquiry"></textarea></p>
 					<p style="text-align: right;"><input type="submit" value="Send Message" /></p>
 				</form>
 
                 <p style="text-align: center; opacity: .5; font-family: Arial, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;"><a href="https://seattlewebco.com" title="Seattle website design and development" style="text-decoration: none;">Seattle Web Design & Development</a></p>
 			</div>
 		</div>
+		<script>
+			window.addEventListener("DOMContentLoaded", function() {
+
+			// get the form elements defined in your form HTML above
+
+			var form = document.getElementById("my-form");
+			var button = document.getElementById("my-form-button");
+			var status = document.getElementById("my-form-status");
+
+			// Success and Error functions for after the form is submitted
+
+			function success() {
+				form.reset();
+				button.style = "display: none ";
+				status.innerHTML = "Thanks!";
+			}
+
+			function error() {
+				status.innerHTML = "Oops! There was a problem.";
+			}
+
+			// handle the form submission event
+
+			form.addEventListener("submit", function(ev) {
+				ev.preventDefault();
+				var data = new FormData(form);
+				ajax(form.method, form.action, data, success, error);
+			});
+			});
+
+			// helper function for sending an AJAX request
+
+			function ajax(method, url, data, success, error) {
+			var xhr = new XMLHttpRequest();
+			xhr.open(method, url);
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState !== XMLHttpRequest.DONE) return;
+				if (xhr.status === 200) {
+				success(xhr.response, xhr.responseType);
+				} else {
+				error(xhr.status, xhr.response, xhr.responseType);
+				}
+			};
+			xhr.send(data);
+			}
+		</script>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -35,7 +81,6 @@
 
 		  ga('create', 'UA-41901942-1', 'auto');
 		  ga('send', 'pageview');
-
 		</script>
 	</body>
 </html>

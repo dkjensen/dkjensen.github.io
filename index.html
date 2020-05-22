@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<title>David Jensen - Website Application Developer</title>
-		<link rel="stylesheet" href="/assets/css/normalize.css" />
-        <link rel="stylesheet" href="/assets/css/style.css?v=1.0.7" />
+		<link rel="stylesheet" href="assets/css/normalize.css" />
+        <link rel="stylesheet" href="assets/css/style.css?v=1.0.7" />
         <link rel="canonical" href="https://dkjensen.com/" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="robots" content="index,follow">
@@ -22,7 +22,7 @@
 					<p><input type="text" name="name" placeholder="Contact name" /></p>
 					<p><input type="email" name="email" placeholder="Email" /></p>
 					<p><textarea name="message" placeholder="Inquiry"></textarea></p>
-					<div class="g-recaptcha" data-sitekey="6LfYpFEUAAAAABoQGthrNmLT-LtsHUkyCK4E1JX7"></div>
+					<p><input type="text" name="phone" placeholder="What is 7 + 4?" /></p>
 					<p style="text-align: right;"><input type="submit" id="submit" value="Send Message" /></p>
 				</form>
 
@@ -55,7 +55,15 @@
 			form.addEventListener("submit", function(ev) {
 				ev.preventDefault();
 				var data = new FormData(form);
-				ajax(form.method, form.action, data, success, error);
+
+				console.log( data.get('phone') );
+
+				if( data.get('phone') != '11' ) {
+					error();
+				} else {
+					data.delete('phone');
+					ajax(form.method, form.action, data, success, error);
+				}
 			});
 			});
 
@@ -85,6 +93,5 @@
 		  ga('create', 'UA-41901942-1', 'auto');
 		  ga('send', 'pageview');
 		</script>
-		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	</body>
 </html>
